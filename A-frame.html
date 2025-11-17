@@ -3,17 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Casa Tecnología</title>
+  <title>Casa A-Frame Tejado Triangular</title>
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <style> body { margin: 0; } </style>
 </head>
 <body>
-<a-scene background="color: #88ccee" cursor="rayOrigin: mouse">
+<a-scene background="color: #88ccee">
 
   <!-- Cámara -->
-  <a-entity id="player" position="0 1.6 10">
-    <a-entity camera look-controls wasd-controls="acceleration: 200" position="0 0 0"></a-entity>
-  </a-entity>
+  <a-entity camera look-controls wasd-controls position="0 1.6 10"></a-entity>
 
   <!-- Luz ambiente y direccional -->
   <a-entity light="type: ambient; intensity: 0.6"></a-entity>
@@ -23,93 +21,25 @@
   <a-plane rotation="-90 0 0" width="50" height="50" color="#4CAF50"></a-plane>
 
   <!-- Casa -->
-  <a-entity id="house" position="0 0 0" scale="1.8 1.8 1.8">
+  <a-entity id="house" position="0 0 0">
 
     <!-- Paredes principales -->
-    <a-box position="0 1.5 0" depth="8" height="4" width="5" color="#d9c7a3" material="roughness:0.8"></a-box>
+    <a-box position="0 1.5 0" depth="6" height="3" width="5" color="#d9c7a3" material="roughness:0.8"></a-box>
 
-    <!-- Suelos internos -->
-    <a-plane rotation="-90 0 0" position="-1.3 0.01 -2" width="2" height="3.5" color="#c8b89a"></a-plane>
-    <a-plane rotation="-90 0 0" position="1.3 0.01 -2" width="2" height="3.5" color="#c8b89a"></a-plane>
-    <a-plane rotation="-90 0 0" position="0 0.01 2.2" width="4" height="3.2" color="#bababa"></a-plane>
+    <!-- Ventanas -->
+    <a-box position="-2 1.5 -2.9" width="1" height="1" depth="0.05" color="#aee7ff" opacity="0.7"></a-box>
+    <a-box position="2 1.5 -2.9" width="1" height="1" depth="0.05" color="#aee7ff" opacity="0.7"></a-box>
 
-    <!-- Paredes divisorias -->
-    <a-box position="0 1 -2" depth="0.05" height="3" width="5" color="#e2d5bc"></a-box>
-    <a-box position="0 1 0.3" depth="0.05" height="3" width="5" color="#e2d5bc"></a-box>
+    <!-- Puerta -->
+    <a-box position="0 1 3.05" width="1.2" height="2" depth="0.05" color="#5a3e1b"></a-box>
 
-    <!-- Techo centrado y semitransparente -->
-    <a-cone position="0 4.1 0.2" radius-bottom="3.6" radius-top="0.1" height="2" color="#b54a1d" opacity="0.9"></a-cone>
-
-    <!-- Puerta principal con bisagra -->
-    <a-entity id="doorPivot" position="-1.1 0 4">
-      <a-box id="door" class="clickable" position="0.55 1 0" depth="0.08" height="2" width="1.1" color="#5a3e1b"></a-box>
+    <!-- Tejado triangular -->
+    <a-entity position="0 3 0">
+      <a-entity geometry="primitive: box; width: 5; height: 0.1; depth: 6" material="color:#b54a1d" rotation="0 0 0" position="0 0 0"></a-entity>
+      <a-entity geometry="primitive: cone; radius-bottom:3; radius-top:0; height:1.5" material="color:#b54a1d" rotation="0 0 0" position="0 0.5 0" scale="1 1 0.5"></a-entity>
     </a-entity>
-
-    <!-- Puertas interiores con bisagra -->
-    <a-entity position="-1 0.1 -0.2">
-      <a-box class="clickable" id="pLeft" position="0.5 0.9 0" width="1" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
-    </a-entity>
-    <a-entity position="1 0.1 -0.2">
-      <a-box class="clickable" id="pRight" position="0.5 0.9 0" width="1" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
-    </a-entity>
-    <a-entity position="0 0.1 1">
-      <a-box class="clickable" id="pBath" position="0.6 0.9 0" width="1.2" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
-    </a-entity>
-
-    <!-- Ventanas con marco -->
-    <a-plane position="-2.4 2 -2" width="1.5" height="1" color="#aee7ff" opacity="0.7"></a-plane>
-    <a-plane position="2.4 2 -2" width="1.5" height="1" color="#aee7ff" opacity="0.7"></a-plane>
-    <a-plane position="0 2 3.6" width="2" height="1.2" color="#aee7ff" opacity="0.7"></a-plane>
-    <a-box position="-2.4 2 -2" width="1.55" height="1.05" depth="0.05" color="#604020"></a-box>
-    <a-box position="2.4 2 -2" width="1.55" height="1.05" depth="0.05" color="#604020"></a-box>
-    <a-box position="0 2 3.6" width="2.05" height="1.25" depth="0.05" color="#604020"></a-box>
-
-    <!-- Muebles interiores -->
-    <a-box position="-1.8 0.45 -3" width="1.6" height="0.4" depth="2.4" color="#8d6e63"></a-box>
-    <a-box position="-1.8 0.9 -3" width="1.6" height="0.1" depth="2.4" color="#ffffff"></a-box>
-    <a-box position="1.8 0.7 -3" width="1.6" height="0.7" depth="0.8" color="#9e9e9e"></a-box>
-    <a-box position="1.8 1 -3" width="1.4" height="0.05" depth="0.6" color="#cfcfcf"></a-box>
-    <a-cylinder position="-1 0.6 2.5" radius="0.45" height="1" color="#ffffff"></a-cylinder>
-    <a-cylinder position="-1 1.2 2.5" radius="0.1" height="0.3" color="#c0c0c0"></a-cylinder>
-    <a-box position="1 0.7 2.3" width="0.8" height="0.8" depth="0.6" color="#e0e0e0"></a-box>
-    <a-box position="1 1.6 2.3" width="0.8" height="1.6" depth="0.1" color="#d0d0d0"></a-box>
-
-    <!-- Luces interiores -->
-    <a-entity light="type: point; intensity: 1; distance: 7" position="-1.3 3 -2"></a-entity>
-    <a-entity light="type: point; intensity: 1; distance: 7" position="1.3 3 -2"></a-entity>
-    <a-entity light="type: point; intensity: 1; distance: 7" position="0 3 2"></a-entity>
 
   </a-entity>
-
-  <script>
-    // Puerta principal
-    const door = document.querySelector('#door');
-    let doorOpen = false;
-    door.addEventListener('click', () => {
-      door.setAttribute('rotation', doorOpen ? '0 0 0' : '0 90 0');
-      doorOpen = !doorOpen;
-    });
-
-    // Puertas interiores
-    const pLeft = document.querySelector('#pLeft');
-    let pLeftOpen = false;
-    pLeft.addEventListener('click', () => {
-      pLeft.setAttribute('rotation', pLeftOpen ? '0 0 0' : '0 90 0');
-      pLeftOpen = !pLeftOpen;
-    });
-    const pRight = document.querySelector('#pRight');
-    let pRightOpen = false;
-    pRight.addEventListener('click', () => {
-      pRight.setAttribute('rotation', pRightOpen ? '0 0 0' : '0 90 0');
-      pRightOpen = !pRightOpen;
-    });
-    const pBath = document.querySelector('#pBath');
-    let pBathOpen = false;
-    pBath.addEventListener('click', () => {
-      pBath.setAttribute('rotation', pBathOpen ? '0 0 0' : '0 90 0');
-      pBathOpen = !pBathOpen;
-    });
-  </script>
 
 </a-scene>
 </body>
