@@ -1,81 +1,111 @@
 <!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escena A-Frame — Ejemplo</title>
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <!-- Comentarios: guarda este archivo como `escena-aframe.html` y ábrelo en tu navegador -->
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    .hint { position: fixed; left: 8px; top: 8px; background: rgba(0,0,0,0.5); color: white; padding: 6px 10px; border-radius: 6px; z-index: 999; }
+  </style>
+</head>
+<body>
+  <div class="hint">WASD / flechas para moverte • Click o tap para interactuar • Pulsa F11 para pantalla completa</div>
 
+  <a-scene background="color: #88ccee" cursor="rayOrigin: mouse">
 
-<!-- Elementos interactivos -->
-<!-- Caja giratoria (clic para cambiar color) -->
-<a-box class="clickable"
-position="-1 0.75 -2"
-rotation="0 45 0"
-depth="1"
-height="1"
-width="1"
-material="color: #FF5722; metalness: 0.2; roughness: 0.6"
-animation="property: rotation; to: 0 405 0; loop: true; dur: 6000; easing: linear"
-event-set__enter="material.color: #FFC107"
-event-set__leave="material.color: #FF5722"
->
-</a-box>
+    <!-- Assets (texturas, modelos, sonidos) -->
+    <a-assets>
+      <!-- Puedes añadir aquí <img>, <audio>, <a-asset-item> para glTF, etc. -->
+    </a-assets>
 
+    <!-- Cámara con controles y cursor (usable en escritorio y móviles) -->
+    <a-entity id="player" position="0 1.6 4">
+      <a-entity camera look-controls wasd-controls="acceleration: 200" position="0 0 0">
+        <a-entity cursor="fuse: false; rayOrigin: mouse" raycaster="objects: .clickable" position="0 0 -1"
+                  geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+                  material="shader: flat; opacity: 0.9"></a-entity>
+      </a-entity>
+    </a-entity>
 
-<!-- Esfera flotante con animación de rebote -->
-<a-sphere class="clickable"
-position="1.5 1.2 -3"
-radius="0.6"
-material="color: #2196F3; opacity: 0.95"
-animation__bounce="property: position; dir: alternate; dur: 1200; loop: true; to: 1.5 1.8 -3; easing: easeInOutSine"
-></a-sphere>
+    <!-- Luz ambiente y direccional -->
+    <a-entity light="type: ambient; intensity: 0.6"></a-entity>
+    <a-entity light="type: directional; intensity: 0.8" position="-1 2 1"></a-entity>
 
+    <!-- Suelo -->
+    <a-plane rotation="-90 0 0" width="30" height="30" color="#4CAF50" shadow="receive: true"></a-plane>
 
-<!-- Texto 3D informativo -->
-<a-entity position="0 2 -3">
-<a-text value="Escena A-Frame — ejemplo" align="center" width="4" color="#111" ></a-text>
-</a-entity>
+    <!-- Cielo con gradiente (simulado con una esfera grande) -->
+    <a-sky color="#87CEEB"></a-sky>
 
+    <!-- Elementos interactivos -->
+    <!-- Caja giratoria (clic para cambiar color) -->
+    <a-box class="clickable"
+           position="-1 0.75 -2"
+           rotation="0 45 0"
+           depth="1"
+           height="1"
+           width="1"
+           material="color: #FF5722; metalness: 0.2; roughness: 0.6"
+           animation="property: rotation; to: 0 405 0; loop: true; dur: 6000; easing: linear"
+           event-set__enter="material.color: #FFC107"
+           event-set__leave="material.color: #FF5722"
+           >
+    </a-box>
 
-<!-- Unos pequeños cilindros alrededor para decoración -->
-<a-cylinder position="-3 0.5 -4" radius="0.3" height="1" material="color: #795548"></a-cylinder>
-<a-cylinder position="-2 0.5 -4.5" radius="0.3" height="1.2" material="color: #6D4C41"></a-cylinder>
-<a-cylinder position="3 0.5 -5" radius="0.3" height="0.9" material="color: #8D6E63"></a-cylinder>
+    <!-- Esfera flotante con animación de rebote -->
+    <a-sphere class="clickable"
+              position="1.5 1.2 -3"
+              radius="0.6"
+              material="color: #2196F3; opacity: 0.95"
+              animation__bounce="property: position; dir: alternate; dur: 1200; loop: true; to: 1.5 1.8 -3; easing: easeInOutSine"
+              ></a-sphere>
 
+    <!-- Texto 3D informativo -->
+    <a-entity position="0 2 -3">
+      <a-text value="Escena A-Frame — ejemplo" align="center" width="4" color="#111" ></a-text>
+    </a-entity>
 
-<!-- Entidad que escucha clicks y muestra una animación breve -->
-<a-entity id="click-handler" position="0 0 0">
-<a-entity id="pulse" geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.25" material="opacity: 0.7" visible="false"></a-entity>
-</a-entity>
+    <!-- Unos pequeños cilindros alrededor para decoración -->
+    <a-cylinder position="-3 0.5 -4" radius="0.3" height="1" material="color: #795548"></a-cylinder>
+    <a-cylinder position="-2 0.5 -4.5" radius="0.3" height="1.2" material="color: #6D4C41"></a-cylinder>
+    <a-cylinder position="3 0.5 -5" radius="0.3" height="0.9" material="color: #8D6E63"></a-cylinder>
 
+    <!-- Entidad que escucha clicks y muestra una animación breve -->
+    <a-entity id="click-handler" position="0 0 0">
+      <a-entity id="pulse" geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.25" material="opacity: 0.7" visible="false"></a-entity>
+    </a-entity>
 
-<!-- Script para interactividad extra -->
-<script>
-// Cambiar color de la esfera o caja al hacer click y mostrar pulso
-document.addEventListener('DOMContentLoaded', function () {
-const clickables = document.querySelectorAll('.clickable');
-const pulse = document.querySelector('#pulse');
+    <!-- Script para interactividad extra -->
+    <script>
+      // Cambiar color de la esfera o caja al hacer click y mostrar pulso
+      document.addEventListener('DOMContentLoaded', function () {
+        const clickables = document.querySelectorAll('.clickable');
+        const pulse = document.querySelector('#pulse');
 
+        clickables.forEach(el => {
+          el.addEventListener('click', () => {
+            // efecto visual: mostrar pulso en la posición del objeto
+            const pos = el.getAttribute('position');
+            pulse.setAttribute('position', { x: pos.x, y: pos.y + 0.1, z: pos.z });
+            pulse.setAttribute('visible', true);
+            pulse.setAttribute('animation', 'property: scale; to: 4 4 4; dur: 300; easing: easeOutQuad');
 
-clickables.forEach(el => {
-el.addEventListener('click', () => {
-// efecto visual: mostrar pulso en la posición del objeto
-const pos = el.getAttribute('position');
-pulse.setAttribute('position', { x: pos.x, y: pos.y + 0.1, z: pos.z });
-pulse.setAttribute('visible', true);
-pulse.setAttribute('animation', 'property: scale; to: 4 4 4; dur: 300; easing: easeOutQuad');
+            setTimeout(() => {
+              pulse.setAttribute('visible', false);
+              pulse.removeAttribute('animation');
+            }, 320);
 
+            // cambio de color aleatorio
+            const randColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            el.setAttribute('material', 'color', randColor);
+          });
+        });
+      });
+    </script>
 
-setTimeout(() => {
-pulse.setAttribute('visible', false);
-pulse.removeAttribute('animation');
-}, 320);
-
-
-// cambio de color aleatorio
-const randColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-el.setAttribute('material', 'color', randColor);
-});
-});
-});
-</script>
-
-
-</a-scene>
+  </a-scene>
 </body>
 </html>
