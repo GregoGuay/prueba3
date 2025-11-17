@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Casa tecnología</title>
+  <title>Escena A-Frame — Ejemplo</title>
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <!-- Comentarios: guarda este archivo como `escena-aframe.html` y ábrelo en tu navegador -->
   <style>
@@ -26,8 +26,48 @@
       <a-entity camera look-controls wasd-controls="acceleration: 200" position="0 0 0">
         <a-entity cursor="fuse: false; rayOrigin: mouse" raycaster="objects: .clickable" position="0 0 -1"
                   geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-                  material="shader: flat; opacity: 0.9"></a-entity>
+                  material="shader: flat; opacity: 0.9">
+      <!-- Marcos de ventanas -->
+      <a-box position="-2.4 2 -2" width="1.55" height="1.05" depth="0.05" color="#604020"></a-box>
+      <a-box position="2.4 2 -2" width="1.55" height="1.05" depth="0.05" color="#604020"></a-box>
+      <a-box position="0 2 3.6" width="2.05" height="1.25" depth="0.05" color="#604020"></a-box>
+
+      <!-- Puertas interiores con bisagra -->
+      <a-entity position="-1 0.1 -0.2">
+        
       </a-entity>
+      <a-entity position="1 0.1 -0.2">
+        <a-box class="clickable" id="pRight" position="0.5 0.9 0" width="1" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
+      </a-entity>
+      <a-entity position="0 0.1 1">
+        <a-box class="clickable" id="pBath" position="0.6 0.9 0" width="1.2" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
+      </a-entity>
+
+      <!-- Muebles mejorados -->
+      <!-- Cama habitación izquierda -->
+      <a-box position="-1.8 0.45 -3" width="1.6" height="0.4" depth="2.4" color="#8d6e63"></a-box>
+      <a-box position="-1.8 0.9 -3" width="1.6" height="0.1" depth="2.4" color="#ffffff"></a-box>
+
+      <!-- Escritorio habitación derecha -->
+      <a-box position="1.8 0.7 -3" width="1.6" height="0.7" depth="0.8" color="#9e9e9e"></a-box>
+      <a-box position="1.8 1 -3" width="1.4" height="0.05" depth="0.6" color="#cfcfcf"></a-box>
+
+      <!-- Baño: lavabo y ducha -->
+      
+      
+      <a-box position="1 0.7 2.3" width="0.8" height="0.8" depth="0.6" color="#e0e0e0"></a-box>
+      <a-box position="1 1.6 2.3" width="0.8" height="1.6" depth="0.1" color="#d0d0d0"></a-box>
+
+      <!-- Interruptores de luz -->
+      <a-box id="switch1" class="clickable" position="-0.5 1.2 -1" width="0.1" height="0.2" depth="0.05" color="#333"></a-box>
+      <a-box id="switch2" class="clickable" position="0.5 1.2 -1" width="0.1" height="0.2" depth="0.05" color="#333"></a-box>
+      <a-box id="switch3" class="clickable" position="0 1.2 1.5" width="0.1" height="0.2" depth="0.05" color="#333"></a-box>
+
+      <!-- Segundo piso (estructura) -->
+      <a-box position="0 3 0" depth="8" height="4" width="5" color="#d1c6a0" opacity="0.97"></a-box>
+      <a-plane rotation="-90 0 0" position="0 2.01 0" width="5" height="8" color="#b89f7a"></a-plane>
+
+    </a-entity>
     </a-entity>
 
     <!-- Luz ambiente y direccional -->
@@ -56,12 +96,7 @@
     </a-box>
 
     <!-- Esfera flotante con animación de rebote -->
-    <a-sphere class="clickable"
-              position="1.5 1.2 -3"
-              radius="0.6"
-              material="color: #2196F3; opacity: 0.95"
-              animation__bounce="property: position; dir: alternate; dur: 1200; loop: true; to: 1.5 1.8 -3; easing: easeInOutSine"
-              ></a-sphere>
+    
 
     <!-- Texto 3D informativo -->
     <a-entity position="0 2 -3">
@@ -69,9 +104,9 @@
     </a-entity>
 
     <!-- Unos pequeños cilindros alrededor para decoración -->
-    <a-cylinder position="-3 0.5 -4" radius="0.3" height="1" material="color: #795548"></a-cylinder>
-    <a-cylinder position="-2 0.5 -4.5" radius="0.3" height="1.2" material="color: #6D4C41"></a-cylinder>
-    <a-cylinder position="3 0.5 -5" radius="0.3" height="0.9" material="color: #8D6E63"></a-cylinder>
+    
+    
+    
 
     <!-- Entidad que escucha clicks y muestra una animación breve -->
     <a-entity id="click-handler" position="0 0 0">
@@ -118,59 +153,53 @@
     </script>
 
       <!-- Casa interactiva -->
-    <a-entity id="house" position="0 0 -8">
-      <!-- Paredes principales -->
-      <a-box position="0 1.5 0" depth="6" height="3" width="3" color="#d9c7a3" material="roughness:0.8"></a-box>
+    <a-entity id="house" position="0 0 -10" scale="1.8 1.8 1.8">
+      <!-- Paredes principales más grandes -->
+      <a-box position="0 1.5 0" depth="8" height="4" width="5" color="#d9c7a3" material="roughness:0.8"></a-box>
 
-      <!-- Suelos internos: 2 habitaciones + 1 baño -->
-      <!-- Habitación izquierda -->
-      <a-plane rotation="-90 0 0" position="-0.8 0.01 -1.5" width="1.2" height="2.8" color="#c8b89a"></a-plane>
+      <!-- Suelos internos más amplios -->
+      <a-plane rotation="-90 0 0" position="-1.3 0.01 -2" width="2" height="3.5" color="#c8b89a"></a-plane>
+      <a-plane rotation="-90 0 0" position="1.3 0.01 -2" width="2" height="3.5" color="#c8b89a"></a-plane>
+      <a-plane rotation="-90 0 0" position="0 0.01 2.2" width="4" height="3.2" color="#bababa"></a-plane>
 
-      <!-- Habitación derecha -->
-      <a-plane rotation="-90 0 0" position="0.8 0.01 -1.5" width="1.2" height="2.8" color="#c8b89a"></a-plane>
+      <!-- Paredes divisorias -->
+      <a-box position="0 1 -2" depth="0.05" height="3" width="5" color="#e2d5bc"></a-box>
+      <a-box position="0 1 0.3" depth="0.05" height="3" width="5" color="#e2d5bc"></a-box>
 
-      <!-- Baño al fondo -->
-      <a-plane rotation="-90 0 0" position="0 0.01 1.5" width="2.5" height="2.5" color="#bababa"></a-plane>
+      <!-- Techo centrado -->
+      <a-cone position="0 4.1 0.2" radius-bottom="3.6" radius-top="0.1" height="2" color="#b54a1d"></a-cone>
 
-      <!-- Pared divisoria entre habitaciones -->
-      <a-box position="0 1 -1.5" depth="0.05" height="2" width="3" color="#e2d5bc"></a-box>
-
-      <!-- Pared divisoria del baño -->
-      <a-box position="0 1 0.1" depth="0.05" height="2" width="3" color="#e2d5bc"></a-box>
-
-      <!-- Techo -->
-      <a-cone position="0 3.2 -1.5" radius-bottom="2.2" radius-top="0.1" height="1.5" color="#b54a1d"></a-cone>
-
-      <!-- Puerta interactiva (con bisagra real) -->
-      <!-- Puerta -->
+      <!-- Puerta principal -->
+      <a-entity id="doorPivot" position="-1.1 0 4">
+        <a-box id="door" class="clickable" position="0.55 1 0" depth="0.08" height="2" width="1.1" color="#5a3e1b"></a-box>
+      </a-entity>
 
       <!-- Puertas interiores -->
-      <!-- Puerta habitación izquierda -->
-      <a-box class="clickable" position="-0.6 0.75 -0.1" width="0.8" height="1.5" depth="0.05" color="#6b4a2b"></a-box>
-      <!-- Puerta habitación derecha -->
-      <a-box class="clickable" position="0.6 0.75 -0.1" width="0.8" height="1.5" depth="0.05" color="#6b4a2b"></a-box>
-      <!-- Puerta baño -->
-      <a-box class="clickable" position="0 0.75 0.6" width="1" height="1.5" depth="0.05" color="#6b4a2b"></a-box>
+      <a-box class="clickable" position="-1 1 -0.2" width="1" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
+      <a-box class="clickable" position="1 1 -0.2" width="1" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
+      <a-box class="clickable" position="0 1 1" width="1.2" height="1.8" depth="0.08" color="#6b4a2b"></a-box>
 
-      <!-- Ventanas -->
-      <a-plane position="-1.4 1.5 -1.5" width="1" height="0.7" color="#aee7ff" opacity="0.7"></a-plane>
-      <a-plane position="1.4 1.5 -1.5" width="1" height="0.7" color="#aee7ff" opacity="0.7"></a-plane>
-      <a-plane position="0 1.5 2.8" width="1.5" height="0.8" color="#aee7ff" opacity="0.7"></a-plane>
+      <!-- Ventanas más grandes -->
+      <a-plane position="-2.4 2 -2" width="1.5" height="1" color="#aee7ff" opacity="0.7"></a-plane>
+      <a-plane position="2.4 2 -2" width="1.5" height="1" color="#aee7ff" opacity="0.7"></a-plane>
+      <a-plane position="0 2 3.6" width="2" height="1.2" color="#aee7ff" opacity="0.7"></a-plane>
 
-      <!-- Muebles habitación izquierda -->
-      <a-box position="-1.1 0.45 -2" width="0.6" height="0.4" depth="1" color="#8d6e63"></a-box>
-      <a-box position="-0.5 0.25 -2.3" width="0.4" height="0.25" depth="0.4" color="#9e9e9e"></a-box>
+      <!-- Muebles habitaciones -->
+      <a-box position="-1.8 0.6 -3" width="1" height="0.6" depth="1.6" color="#8d6e63"></a-box>
+      <a-box position="-0.8 0.3 -3.4" width="0.6" height="0.4" depth="0.6" color="#9e9e9e"></a-box>
 
-      <!-- Muebles habitación derecha -->
-      <a-box position="1.1 0.45 -2" width="0.6" height="0.4" depth="1" color="#8d6e63"></a-box>
-      <a-box position="0.5 0.25 -2.3" width="0.4" height="0.25" depth="0.4" color="#9e9e9e"></a-box>
+      <a-box position="1.8 0.6 -3" width="1" height="0.6" depth="1.6" color="#8d6e63"></a-box>
+      <a-box position="0.8 0.3 -3.4" width="0.6" height="0.4" depth="0.6" color="#9e9e9e"></a-box>
 
       <!-- Muebles baño -->
-      <a-cylinder position="-0.6 0.4 2" radius="0.3" height="0.8" color="#ffffff"></a-cylinder>
-      <a-box position="0.6 0.5 2" width="0.6" height="0.6" depth="0.4" color="#e0e0e0"></a-box>
+      
+      <a-box position="1 0.7 2.3" width="0.8" height="0.8" depth="0.6" color="#e0e0e0"></a-box>
 
       <!-- Luces interiores -->
-      <a-entity light="type: point; intensity: 0.6; distance: 5" position="-0.8 2 -1.5"></a-entity>
+      <a-entity light="type: point; intensity: 1; distance: 7" position="-1.3 3 -2"></a-entity>
+      <a-entity light="type: point; intensity: 1; distance: 7" position="1.3 3 -2"></a-entity>
+      <a-entity light="type: point; intensity: 1; distance: 7" position="0 3 2"></a-entity>
+    </a-entity>
       <a-entity light="type: point; intensity: 0.6; distance: 5" position="0.8 2 -1.5"></a-entity>
       <a-entity light="type: point; intensity: 0.6; distance: 5" position="0 2 1.5"></a-entity> interactiva (con bisagra real) -->
       <!-- Contenedor que actúa como bisagra en el lado izquierdo -->
