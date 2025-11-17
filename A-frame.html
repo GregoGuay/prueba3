@@ -23,19 +23,21 @@
   <!-- Casa -->
   <a-entity id="house" position="0 0 0">
 
-    <!-- Paredes principales -->
-    <a-box position="0 1.5 0" depth="6" height="3" width="5" color="#d9c7a3" material="roughness:0.8"></a-box>
+    <!-- Paredes principales con huecos para ventanas -->
+    <a-box position="0 1.5 0" depth="0.1" height="3" width="1.9" color="#d9c7a3" material="roughness:0.8"></a-box>
+    <a-box position="2.05 1.5 0" depth="0.1" height="3" width="0.9" color="#d9c7a3" material="roughness:0.8"></a-box>
+    <a-box position="-2.05 1.5 0" depth="0.1" height="3" width="0.9" color="#d9c7a3" material="roughness:0.8"></a-box>
 
-    <!-- Ventanas -->
-    <a-box position="-2 1.5 -2.9" width="1" height="1" depth="0.05" color="#aee7ff" opacity="0.7"></a-box>
-    <a-box position="2 1.5 -2.9" width="1" height="1" depth="0.05" color="#aee7ff" opacity="0.7"></a-box>
+    <!-- Ventanas delante de las paredes -->
+    <a-box position="-2 1.5 -2.9" width="1" height="1" depth="0.05" color="#aee7ff" opacity="0.9"></a-box>
+    <a-box position="2 1.5 -2.9" width="1" height="1" depth="0.05" color="#aee7ff" opacity="0.9"></a-box>
 
     <!-- Puerta -->
     <a-box position="0 1 3.05" width="1.2" height="2" depth="0.05" color="#5a3e1b"></a-box>
 
     <!-- Tejado triangular -->
     <a-entity position="0 3 0">
-      <a-entity geometry="primitive: box; width: 5; height: 0.1; depth: 6" material="color:#b54a1d" rotation="0 0 0" position="0 0 0"></a-entity>
+      <a-entity geometry="primitive: box; width: 5; height: 0.1; depth: 6" material="color:#b54a1d" rotation="0 0 0"></a-entity>
       <a-entity geometry="primitive: cone; radius-bottom:3; radius-top:0; height:1.5" material="color:#b54a1d" rotation="0 0 0" position="0 0.5 0" scale="1 1 0.5"></a-entity>
     </a-entity>
 
