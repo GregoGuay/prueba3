@@ -105,6 +105,41 @@
         });
       });
     </script>
+    <a-entity id="house" position="0 0 -8">
+<!-- Paredes principales (3x3x3, triple del cubo original) -->
+<a-box position="0 1.5 0" depth="3" height="3" width="3" color="#d9c7a3" material="roughness:0.8"></a-box>
+
+
+<!-- Techo -->
+<a-cone position="0 3.2 0" radius-bottom="2.2" radius-top="0.1" height="1.5" color="#b54a1d"></a-cone>
+
+
+<!-- Puerta interactiva -->
+<a-box id="door" class="clickable"
+position="0 0.75 1.52"
+depth="0.05" height="1.5" width="1"
+color="#5a3e1b"
+animation__open="property: rotation; to: 0 90 0; dur: 700; startEvents: abrir"
+animation__close="property: rotation; to: 0 0 0; dur: 700; startEvents: cerrar">
+</a-box>
+</a-entity>
+<script>
+// Control de apertura/cierre de puerta
+document.addEventListener('DOMContentLoaded', function () {
+const door = document.querySelector('#door');
+let abierta = false;
+
+
+door.addEventListener('click', () => {
+if (!abierta) {
+door.emit('abrir');
+} else {
+door.emit('cerrar');
+}
+abierta = !abierta;
+});
+});
+</script>
 
   </a-scene>
 </body>
